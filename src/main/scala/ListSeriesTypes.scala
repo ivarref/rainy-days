@@ -10,9 +10,9 @@ object ListSeriesTypes {
     //println(new PrettyPrinter(80, 2).format(xml))
 
     val content = xml \\ "Envelope" \ "Body" \ "getTimeserieTypesPropertiesResponse" \ "return"
-    val children = content \\ "item"
+    val children = content \ "item"
     children.foreach(x => {
-      println(s"${(x \\ "serieTypeID").text} = ${(x \\ "serieTypeDescription").text}")
+      println(s"${(x \ "serieTypeID").text} = ${(x \ "serieTypeDescription").text}")
     })
   }
 }
