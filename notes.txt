@@ -5,9 +5,14 @@ http://www.columbia.edu/~mhs119/PerceptionsAndDice/
 Hvilke tidsserietyper finnes det?
 http://eklima.met.no/metdata/MetDataService?invoke=getTimeserieTypesProperties&language=&timeserieTypes=
 
+ListElemTypes:
+RR_01 = Nedbørmengde siste minutt
+RR_1 = Nedbørmengde siste time
+RR_3 = Nedbør, tilvekst siste 3 timer i mm
+RR_6 = Nedbørmengde siste 6 timer
+RR_X = Nedbørmengde i en uspesifisert tidsperiode
 
 http://eklima.met.no/metdata/MetDataService?invoke=getMetData&timeserietypeID=0&format=&from=2006-01-01&to=2006-01-05&stations=18700&elements=tam&hours=&months=&username=
-hvorfor funker ikke denne lengre?
 
 
 Hva betyr en elementkode:
