@@ -21,4 +21,6 @@ project/plugins/project/
 .worksheet
 
 src/main/resources/data.tsv
+src/main/scala/Pw.scala
+
 *.swp
