@@ -1,0 +1,55 @@
+RRVIPP = [Nedbør, vipp] Pluviometervipp konstant verdi
+RTS_1 = [Nedbørtid, minutt] Nedbør,  antall minutt siste time
+RR_720 = [Nedbør 720 timer (siste 30 døgn), mm] Nedbør for en løpende måned (30 døgn)
+TAMRR = [Middeltemperatur i nedbørdøgnet, ºC] Døgnverdi: Aritmetisk middel av 24 timeverdier (evt formelbasert middelverdi) for kl 06-06 utc
+DAGRR10 = [Antall dager RR>= 1.0 mm, antall] Antall dager med 1.0 mm nedbør eller mer (RR>= 1.0 mm)
+RR_24X = [Nedbør 24 timer, mm] Maksimum nedbørsum siste 24 timer
+RR_9 = [Nedbør 9 timer, mm] Nedbør, tilvekst siste 9 timer i mm
+RR_01 = [Nedbørintensitet, mm] Nedbørmengde siste minutt
+RR_1 = [Nedbør (1 time), mm] Nedbørmengde siste time
+RR_3 = [Nedbør 3 timer, mm] Nedbør, tilvekst siste 3 timer i mm
+RR_6 = [Nedbør (6 timer), mm] Nedbørmengde siste 6 timer
+RR_X = [Nedbør, mm] Nedbørmengde i en uspesifisert tidsperiode
+RR_24XDT = [Dato for høyeste døgnnedbør, dato] Dato for høyeste døgnnedbør
+ITR = [Måleperiode for nedbør, antall] Antall 6-timers perioder som nedbørmålingen omfatter
+DAGRRRR00 = [Antall dager med nedbør som regn RR>=0.0, antall] Antall dager med nedbør som regn RR>=0.0
+DAGRRSS00 = [Antall dager med nedbør som snø SS>=0.0, antall] Antall dager med nedbør som snø SS>=0.0
+DAGRRRR = [Antall dager med nedbør som regn RR>=0.1, antall] Antall dager med nedbør som regn RR>=0.1
+DAGRR00 = [Antall dager RR>= 0.0 mm, antall] Antall dager med nedbør RR>= 0.0 mm
+DAGRRSL = [Antall dager med nedbør som sludd SS>=0.1, antall] Antall dager med nedbør som sludd SL>=0.1
+RX24 = [Nedbørsum, mm] Nedbør, maksimalt minuttsintensitet i mm/minutt, siste time
+RR_GE01 = [Nedbør, mm] Maksimal døgnnedbør
+RRTA = [Nedbør i temperaturdøgnet, mm] Døgn- eller månedssum for nedbør (temperaturdøgn 19-19)
+RREV = [Fordampet nedbør, mm] Nedbør i fordampningsdøgnet
+RR2 = [Nedbørsum, mm] Nedbørsum siste 2 timer
+IR = [Nedbørmåling, kodetall] Kodetall som viser om nedbørmengde er med i synopmeldingen (1 = nedbør med, 3 = nedbør ikke falt, 4 = nedbør ikke målt) 
+RRGE100 = [Nedbørdager, antall] Antall dager med nedbør >=100 mm
+DAGRR100 = [Antall dager RR>= 10.0 mm, antall] Antall dager med nedbør RR>= 10.0 mm
+RRINTENS = [Nedbørintensitet, mm/minutt] mm nedbør som har falt på antall minutter. Det blir målt med automatisk nedbørmåler, pluviometer
+
+RR = [Nedbør, mm] Døgn- eller månedssum for nedbør (nedbørdøgn 07-07)
+
+RRX = [Høyeste nedbørsum, mm] Månedens høyeste døgnnedbørsum
+RRN = [Laveste nedbørsum, mm] Månedens laveste døgnnedbørsum
+RA = [Total nedbør, mm] Automatstasjon: Total nedbørmengde i bøtta (samlemengde siden sist tømming)
+X1RR2 = [Nedbør, mm] Nedbør
+X2RR2 = [Nedbør, mm] Nedbør
+RT = [Nedbørtid, minutter] Nedbør,  antall minutter siste time
+RR_12 = [Nedbør (12 timer), mm] Nedbørmengde siste 12 timer
+RR_010 = [Nedbør, mm] Nedbørmengde siste 10 minutter
+RXDT = [Dato for nedbør, dato] Dato for døgnmaksimal  nedbørsum
+DAGRR = [Antall dager RR>= 0.1 mm, antall] Antall dager med 0.1 mm nedbør eller mer (RR>= 0.1 mm)
+DAGRRSS = [Antall dager med nedbør som snø SS>=0.1, antall] Antall dager med nedbør som snø SS>=0.1
+SLAG = [Nedbørslag, kode] Døgnverdi: Sammendrag av nedbørtyper i døgnet: 02 (alle typer snø), 03 (alle typer regn), 30 (kombinasjon av 02 og 03), 31 (dugg, rim, tåke)
+RRA = [Nedbør i forhold til normalen, prosent] Nedbør i prosent av gjeldende nedbørnormal (1961-1990)
+RR_15 = [Nedbør 15 timer, mm] Nedbør, tilvekst siste 15 timer i mm
+RR_18 = [Nedbør 18 timer, mm] Nedbør, tilvekst siste 18 timer i mm
+RT_1 = [Nedbørtid, minutter] Antallet minutt i løpet av en time da det er registrert nedbør av noe slag
+RR_24 = [Nedbør (24 timer), mm] Nedbørmengde siste 24 timer
+RRID = [Nedbør, samlesum, mm] Nedbør fra ikke-daglig stasjon. Nedbørmengden måles på ""tilfeldige"" dager og gjelder fra forrige måling.
+CM = [Type midlere skyer, kodetall] Skytype, mellomhøye skyer (underside ca 2500-6000 meter pluss nedbørskylag), oppgis i kodetall 0-9 (As, Ac, Ns, se skyatlas)
+RR_2 = [Nedbør 2 timer, mm] Nedbør, tilvekst siste to timer i mm
+RT_24 = [Nedbørtid, minutter] Nedbørtid, antall minutter siste 24 timer.
+RTS_12 = [Tid med nedbør som snø, antall minutter siste time, antall] Tid med nedbør som snø, antall minutter siste time
+DRR_GE1 = [Antall dager med RR>1, antall] Antall dager med 1 mm nedbør eller mer
+RT_010 = [Nedbør, mm] Nedbørtilvekst siste 10 minutter

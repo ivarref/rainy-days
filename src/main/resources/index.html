@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+svg {
+font: 10px sans-serif;
+border: 1px dashed #000;
+}
+
+.y.axis path {
+display: none;
+}
+
+.y.axis line {
+stroke: #fff;
+stroke-opacity: .2;
+shape-rendering: crispEdges;
+}
+
+.y.axis .zero line {
+stroke: #000;
+stroke-opacity: 1;
+}
+
+.title {
+font: 300 78px Helvetica Neue;
+fill: #666;
+}
+
+.birthyear,
+.age {
+text-anchor: middle;
+}
+
+.birthyear {
+fill: #fff;
+}
+
+rect {
+fill-opacity: .6;
+fill: #e377c2;
+}
+
+rect:first-child {
+fill: #1f77b4;
+}
+
+</style>
+<title>Rainy days</title>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var margin = {top: 20, right: 40, bottom: 30, left: 20},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom,
+    barWidth = Math.floor(width / 19) - 1;
+
+// An SVG element with a bottom-right origin.
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.tsv("data.tsv", function(error, data) {
+  console.log(data)
+  debugger
+})
+
+
+
+</script>
+
+</body>

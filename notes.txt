@@ -4,13 +4,14 @@ http://www.columbia.edu/~mhs119/PerceptionsAndDice/
 
 Hvilke tidsserietyper finnes det?
 http://eklima.met.no/metdata/MetDataService?invoke=getTimeserieTypesProperties&language=&timeserieTypes=
+0 = Døgnverdier
 
 ListElemTypes:
-RR_01 = Nedbørmengde siste minutt
-RR_1 = Nedbørmengde siste time
-RR_3 = Nedbør, tilvekst siste 3 timer i mm
-RR_6 = Nedbørmengde siste 6 timer
-RR_X = Nedbørmengde i en uspesifisert tidsperiode
+RR = [Nedbør, mm] Døgn- eller månedssum for nedbør (nedbørdøgn 07-07)
+
+-1.0: for nedbør betyr ingen nedbør observert.
+0.0: for nedbør betyr observert nedbør men neglisjert.
+
 
 http://eklima.met.no/metdata/MetDataService?invoke=getMetData&timeserietypeID=0&format=&from=2006-01-01&to=2006-01-05&stations=18700&elements=tam&hours=&months=&username=
 
@@ -22,17 +23,3 @@ http://eklima.met.no/metdata/MetDataService?invoke=getElementsProperties&languag
 Tilgjengelige elementer for tidsserie 0:
 http://eklima.met.no/metdata/MetDataService?invoke=getElementsFromTimeserieType&timeserietypeID=0
 
-<description xsi:type="xsd:string">Døgnverdi: Høyeste verdi av vindhastighet (timinutters middel, FF) for kl 0, 6, 12 og 18 utc.Månedsverdi: Høyeste verdi av døgn-FFX</description>
-<elemCode xsi:type="xsd:string">FFX</elemCode>
-<elemGroup xsi:type="xsd:string">Vind</elemGroup>
-<elemNo xsi:type="xsd:int">-1</elemNo>
-<fromdate xsi:type="xsd:dateTime" xsi:nil="true"/>
-<language xsi:type="xsd:string">no</language>
-<name xsi:type="xsd:string">Høyeste vindhastighet (hovedobservasjoner)</name>
-<todate xsi:type="xsd:dateTime" xsi:nil="true"/>
-<unit xsi:type="xsd:string">m/s</unit>
-</item>
-
-TAM
-Timeverdi: Aritmetisk middel av minuttverdier Døgnverdi: Aritmetisk middel av 24 timeverdier (kl 00-00), evt formelbasert middelverdi ut fra færre observasjoner (kl 18-18)Månedsverdi: Aritmetisk middel av døgn-TAM
-Temperatur / Middeltemperatur
