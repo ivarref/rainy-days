@@ -5,6 +5,7 @@ http://www.columbia.edu/~mhs119/PerceptionsAndDice/
 Hvilke tidsserietyper finnes det?
 http://eklima.met.no/metdata/MetDataService?invoke=getTimeserieTypesProperties&language=&timeserieTypes=
 0 = Døgnverdier
+2 = Viser observasjoner for periode og elementer fra valgte stasjoner
 
 ListElemTypes:
 RR = [Nedbør, mm] Døgn- eller månedssum for nedbør (nedbørdøgn 07-07)
@@ -12,6 +13,12 @@ RR = [Nedbør, mm] Døgn- eller månedssum for nedbør (nedbørdøgn 07-07)
 -1.0: for nedbør betyr ingen nedbør observert.
 0.0: for nedbør betyr observert nedbør men neglisjert.
 
+Om kvalitetskoder:
+http://eklima.met.no/metdata/MetDataService?invoke=getFlagProperties&language=&flagsId=0
+0 - Verdi er kontrollert og funnet i orden.
+1 - Verdi er kontrollert og korrigert, eller verdi mangler og er interpolert.
+2 - Verdi er ikke kontrollert.
+5 - Verdi er svært usikker (ikke korrigert).
 
 http://eklima.met.no/metdata/MetDataService?invoke=getMetData&timeserietypeID=0&format=&from=2006-01-01&to=2006-01-05&stations=18700&elements=tam&hours=&months=&username=
 

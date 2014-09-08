@@ -1,3 +1,7 @@
+RR_1 = [Nedbør (1 time), mm] Nedbørmengde siste time
+RR = [Nedbør, mm] Døgn- eller månedssum for nedbør (nedbørdøgn 07-07)
+
+
 RRVIPP = [Nedbør, vipp] Pluviometervipp konstant verdi
 RTS_1 = [Nedbørtid, minutt] Nedbør,  antall minutt siste time
 RR_720 = [Nedbør 720 timer (siste 30 døgn), mm] Nedbør for en løpende måned (30 døgn)
@@ -6,7 +10,8 @@ DAGRR10 = [Antall dager RR>= 1.0 mm, antall] Antall dager med 1.0 mm nedbør ell
 RR_24X = [Nedbør 24 timer, mm] Maksimum nedbørsum siste 24 timer
 RR_9 = [Nedbør 9 timer, mm] Nedbør, tilvekst siste 9 timer i mm
 RR_01 = [Nedbørintensitet, mm] Nedbørmengde siste minutt
-RR_1 = [Nedbør (1 time), mm] Nedbørmengde siste time
+
+
 RR_3 = [Nedbør 3 timer, mm] Nedbør, tilvekst siste 3 timer i mm
 RR_6 = [Nedbør (6 timer), mm] Nedbørmengde siste 6 timer
 RR_X = [Nedbør, mm] Nedbørmengde i en uspesifisert tidsperiode
@@ -27,7 +32,6 @@ RRGE100 = [Nedbørdager, antall] Antall dager med nedbør >=100 mm
 DAGRR100 = [Antall dager RR>= 10.0 mm, antall] Antall dager med nedbør RR>= 10.0 mm
 RRINTENS = [Nedbørintensitet, mm/minutt] mm nedbør som har falt på antall minutter. Det blir målt med automatisk nedbørmåler, pluviometer
 
-RR = [Nedbør, mm] Døgn- eller månedssum for nedbør (nedbørdøgn 07-07)
 
 RRX = [Høyeste nedbørsum, mm] Månedens høyeste døgnnedbørsum
 RRN = [Laveste nedbørsum, mm] Månedens laveste døgnnedbørsum
