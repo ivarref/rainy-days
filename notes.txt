@@ -10,6 +10,8 @@ http://eklima.met.no/metdata/MetDataService?invoke=getTimeserieTypesProperties&l
 ListElemTypes:
 RR = [Nedbør, mm] Døgn- eller månedssum for nedbør (nedbørdøgn 07-07)
 
+Spesielle dataverdier:
+-99999: er tallet som blir satt ved manglende data, når stasjonen observerer elementet som det blir spurt etter. Hvis stasjonen ikke observerer det det blir spurt etter, så kommer det heller ikke noe data.
 -1.0: for nedbør betyr ingen nedbør observert.
 0.0: for nedbør betyr observert nedbør men neglisjert.
 
