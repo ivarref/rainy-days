@@ -14,9 +14,18 @@ object GetData {
     val from = s"${year}-01-01"
     val to = s"${year}-12-31"
 
-    val element = "RR_1"
     val hours = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23"
-    val url: String = s"http://eklima.met.no/metdata/MetDataService?invoke=getMetData&timeserietypeID=2&format=&from=${from}&to=${to}&stations=18700&elements=${element}&hours=${hours}&months=&username="
+
+
+    val element = "RR"
+    // RR_1 = [Nedbør (1 time), mm] Nedbørmengde siste time
+    // RR = [Nedbør, mm] Døgn- eller månedssum for nedbør (nedbørdøgn 07-07)
+
+    val tidsSerieTypeID = "0"
+    // 0 = Døgnverdier
+    // 2 = Viser observasjoner for periode og elementer fra valgte stasjoner == Timeverdier
+
+    val url: String = s"http://eklima.met.no/metdata/MetDataService?invoke=getMetData&timeserietypeID=${tidsSerieTypeID}&format=&from=${from}&to=${to}&stations=18700&elements=${element}&hours=${hours}&months=&username="
 
     val xml: Elem = XML.loadString(io.Source.fromFile(getUrlToFile(url), "UTF-8").mkString)
 
@@ -34,7 +43,7 @@ object GetData {
 
       val quality: String = prop("quality")
       //println(s"${date} = quality: ${quality}, value: ${value}")
-      if (!("0,1,2,5".split(",").contains(quality)))
+      if (!("0,1,2,5,6".split(",").contains(quality)))
         throw new RuntimeException("Unknown quality: " + quality)
 
       val fullDate: Date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(date)
