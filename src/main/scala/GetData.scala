@@ -10,7 +10,7 @@ import scala.xml.{Elem, XML}
 
 object GetData {
 
-  def doYear(year: Int, ds: HikariDataSource): Unit = {
+  def doHoursOfYear(year: Int, ds: HikariDataSource): Unit = {
     val from = s"${year}-01-01"
     val to = s"${year}-12-31"
 
@@ -18,24 +18,7 @@ object GetData {
     val hours = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23"
     val url: String = s"http://eklima.met.no/metdata/MetDataService?invoke=getMetData&timeserietypeID=2&format=&from=${from}&to=${to}&stations=18700&elements=${element}&hours=${hours}&months=&username="
 
-    val cache: File = new File("../cache/" + MessageDigest.getInstance("MD5").digest(url.getBytes).map("%02X".format(_)).mkString)
-    val cacheDir: File = new File("../cache/")
-    if (!cacheDir.exists()) {
-      cacheDir.mkdirs()
-    }
-
-    if (!cache.exists()) {
-      println("downloading url " + url)
-      val data = io.Source.fromURL(url, "UTF-8")
-      val out = new PrintWriter(cache, "UTF-8")
-      data.getLines.foreach(out.println(_))
-      out.close()
-      data.close()
-      println("downloading url " + url + " done")
-    }
-
-    val data = io.Source.fromFile(cache, "UTF-8").mkString
-    val xml: Elem = XML.loadString(data)
+    val xml: Elem = XML.loadString(io.Source.fromFile(getUrlToFile(url), "UTF-8").mkString)
 
     val content = xml \\ "Envelope" \ "Body" \ "getMetDataResponse" \ "return" \ "timeStamp" \ "item"
     val conn = ds.getConnection
@@ -72,6 +55,25 @@ object GetData {
     conn.close()
   }
 
+  def getUrlToFile(url: String): File = {
+    val cache: File = new File("../cache/" + MessageDigest.getInstance("MD5").digest(url.getBytes).map("%02X".format(_)).mkString)
+    val cacheDir: File = new File("../cache/")
+    if (!cacheDir.exists()) {
+      cacheDir.mkdirs()
+    }
+
+    if (!cache.exists()) {
+      println("downloading url " + url)
+      val data = io.Source.fromURL(url, "UTF-8")
+      val out = new PrintWriter(cache, "UTF-8")
+      data.getLines.foreach(out.println(_))
+      out.close()
+      data.close()
+      println("downloading url " + url + " done")
+    }
+    cache
+  }
+
   def main(args: Array[String]) {
     val config: HikariConfig = new HikariConfig
     config.setMaximumPoolSize(2)
@@ -88,7 +90,7 @@ object GetData {
     conn.close()
 
     (1950 to 2014) foreach(year => {
-      doYear(year, ds)
+      doHoursOfYear(year, ds)
     })
 
   }
