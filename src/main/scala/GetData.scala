@@ -84,14 +84,7 @@ object GetData {
   }
 
   def main(args: Array[String]) {
-    val config: HikariConfig = new HikariConfig
-    config.setMaximumPoolSize(2)
-    config.setDriverClassName("oracle.jdbc.OracleDriver")
-    config.setJdbcUrl("jdbc:oracle:thin:@//localhost:1521/pdb1")
-    config.addDataSourceProperty("user", "ivref")
-    config.addDataSourceProperty("password", Pw.pass())
-    config.setConnectionTimeout(1500)
-    val ds: HikariDataSource = new HikariDataSource(config)
+    val ds: HikariDataSource = getDataSource
 
     val conn = ds.getConnection
     conn.prepareStatement("truncate table rain").execute()
@@ -102,5 +95,17 @@ object GetData {
       doHoursOfYear(year, ds)
     })
 
+  }
+
+  def getDataSource: HikariDataSource = {
+    val config: HikariConfig = new HikariConfig
+    config.setMaximumPoolSize(2)
+    config.setDriverClassName("oracle.jdbc.OracleDriver")
+    config.setJdbcUrl("jdbc:oracle:thin:@//localhost:1521/pdb1")
+    config.addDataSourceProperty("user", "ivref")
+    config.addDataSourceProperty("password", Pw.pass())
+    config.setConnectionTimeout(1500)
+    val ds: HikariDataSource = new HikariDataSource(config)
+    ds
   }
 }

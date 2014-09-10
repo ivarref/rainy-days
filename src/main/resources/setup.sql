@@ -3,6 +3,9 @@ drop table rain;
 
 create table rain (measure_time timestamp, rain number(15,5), quality number);
 
+create index measure_time_idx on rain(measure_time);
+commit;
+
 select stddev(rain) from rain where rain > 0;
 
 select * from rain order by rain desc;
@@ -29,6 +32,7 @@ rain > (select 2*stddev(rain) from rain where rain > 0)
 group by to_char(measure_time, 'MM')
 order by to_char(measure_time, 'MM') asc;
 
+select 2*stddev(rain) from rain where rain > 0;
 
 select count(*) from rain;
 
