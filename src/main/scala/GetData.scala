@@ -98,7 +98,7 @@ object GetData {
     conn.commit()
     conn.close()
 
-    (1950 to 2014) foreach(year => {
+    (1900 to 2014) foreach(year => {
       doHoursOfYear(year, ds)
     })
 
