@@ -21,6 +21,5 @@ where to_char(measure_time, 'MM') in ('06', '07', '08') and rain > 0
 group by to_char(measure_time, 'yyyy')
 order by to_char(measure_time, 'yyyy') desc;
 
-
-
+select * from rain order by rain desc;
 

@@ -30,6 +30,8 @@ libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.5"
 
 libraryDependencies += "com.zaxxer" % "HikariCP" % "2.0.1"
 
+libraryDependencies += "org.eclipse.jetty" % "jetty-webapp" % "9.2.2.v20140723"
+
 // http://www.oracle.com/technetwork/database/enterprise-edition/jdbc-112010-090769.html
 // mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.4 -Dpackaging=jar -Dfile=ojdbc6.jar -DgeneratePom=true
 
