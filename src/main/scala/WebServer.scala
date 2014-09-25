@@ -29,8 +29,8 @@ object WebServer {
               val writer = resp.getWriter
               writer.println("date\train")
               for (conn <- managed(ds.getConnection);
-                    ps <- managed(conn.prepareStatement(sql));
-                    rs <- managed(ps.executeQuery())) {
+                   ps <- managed(conn.prepareStatement(sql));
+                   rs <- managed(ps.executeQuery())) {
                 Stream.continually(rs.next()).takeWhile(_ == true).foreach(_ => {
                   writer.print(rs.getDate(1))
                   writer.print('\t')
@@ -43,8 +43,7 @@ object WebServer {
         })
         addHandler(new ResourceHandler {
           setBaseResource(new FileResource(new File("src/main/resources").toURI))
-        }
-        )
+        })
       })
     }
     server.start()
