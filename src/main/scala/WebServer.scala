@@ -14,7 +14,6 @@ object WebServer {
 
   def main(args: Array[String]) {
     val ds = GetData.getDataSource
-
     val server: Server = new Server() {
       setConnectors(Array(new ServerConnector(this) {
         setPort(8080)
@@ -25,7 +24,8 @@ object WebServer {
           setContextPath("/data")
           addServlet(new ServletHolder(new HttpServlet {
             override def doGet(req: HttpServletRequest, resp: HttpServletResponse): Unit = {
-              val sql = "select measure_time, rain from rain where to_char(measure_time, 'yyyy') = '2014' order by measure_time"
+              val year = req.getParameterMap.getOrDefault("year", Array("2013"))(0)
+              val sql = "select measure_time, rain from rain where to_char(measure_time, 'yyyy') = '" + Integer.valueOf(year) + "' order by measure_time"
               val writer = resp.getWriter
               writer.println("date\train")
               for (conn <- managed(ds.getConnection);

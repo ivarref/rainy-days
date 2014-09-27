@@ -6,57 +6,28 @@ svg {
 font: 10px sans-serif;
 border: 1px dashed #000;
 }
-
-.y.axis path {
-display: none;
-}
-
-.y.axis line {
-stroke: #fff;
-stroke-opacity: .2;
-shape-rendering: crispEdges;
-}
-
-.y.axis .zero line {
-stroke: #000;
-stroke-opacity: 1;
-}
-
 .title {
-font: 300 78px Helvetica Neue;
-fill: #666;
+  font: 300 78px Helvetica Neue;
+  fill: #666;
 }
 
-.birthyear,
-.age {
-text-anchor: middle;
-}
-
-.birthyear {
-fill: #fff;
-}
-
-rect {
-fill-opacity: .6;
-fill: #e377c2;
-}
-
-rect:first-child {
-fill: #1f77b4;
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
 
 </style>
 <title>Rainy days</title>
 <body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="d3.v3.min.js"></script>
 <script>
 
 var margin = {top: 20, right: 40, bottom: 30, left: 20},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom,
-    barWidth = Math.floor(width / 19) - 1;
+    width = 900 - margin.left - margin.right,
+    height = 420 - margin.top - margin.bottom;
 
-// An SVG element with a bottom-right origin.
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -65,15 +36,66 @@ var svg = d3.select("body").append("svg")
 
 var format = d3.time.format("%Y-%m-%d");
 
-d3.tsv("/data/", function(error, data) {
-  data.forEach(function(d) {
-    d.date = format.parse(d.date)
-    d.rain = +d.rain
+var yr = 2014
+
+var yrtext = svg.append('text').attr('class', 'title')
+    .attr("dy", ".71em")
+
+var xaxisElem = svg.append('g').attr('class', 'x axis')
+    .attr('transform', 'translate(0,' + height + ')')
+
+var yaxisElem = svg.append('g').attr('class', 'y axis')
+    .attr('transform', 'translate(' + width + ',0)')
+
+yaxisElem.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0)
+      .attr("dy", "-.71em")
+      .style("text-anchor", "end")
+      .text("Precipitation (mm)");
+
+function update(year) {
+  d3.tsv("/data/?year=" + year, function(error, data) {
+    data.forEach(function(d) {
+      d.date = format.parse(d.date)
+      d.rain = +d.rain
+    })
+    yrtext.text(year)
+
+    var ts = d3.time.scale()
+    ts.domain([format.parse(year + "-01-01"), format.parse(year+"-12-31")])
+    ts.range([0, width])
+
+    var rainscale = d3.scale.linear()
+    rainscale.domain([0, 72.8])
+    rainscale.range([height, 0])
+
+    var sel = svg.selectAll('circle').data(data)
+
+    sel.enter().append('circle')
+      .attr('r', '2.0')
+
+    sel.attr('cx', function(d) { return ts(d.date) })
+      .attr('cy', function(d) { return rainscale(d.rain) })
+
+    sel.exit().remove()
+
+    xaxisElem.call(d3.svg.axis().scale(ts).orient('bottom'))
+    yaxisElem.call(d3.svg.axis().scale(rainscale).orient('right'))
   })
-})
+}
+update(yr);
 
+window.focus();
 
+d3.select(window).on("keydown", function() {
+  switch (d3.event.keyCode) {
+    case 37: yr = Math.max(1937, yr - 1); break;
+    case 39: yr = Math.min(2014, yr + 1); break;
+  }
+  console.log('update with year ' + yr)
+  update(yr);
+});
 
 </script>
-
 </body>
