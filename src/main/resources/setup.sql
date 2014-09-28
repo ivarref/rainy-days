@@ -3,6 +3,8 @@ drop table rain;
 
 create table rain (measure_time timestamp, rain number(15,5), quality number);
 
+create table precipitation (measure_time timestamp, rr number(15,5), rr_quality number, slag number, slag_quality);
+
 create index measure_time_idx on rain(measure_time);
 commit;
 

@@ -10,16 +10,16 @@ import scala.xml.{Elem, XML}
 
 object GetData {
 
-  def doHoursOfYear(year: Int, ds: HikariDataSource): Unit = {
+  def doDaysOfYear(year: Int, ds: HikariDataSource): Unit = {
     val from = s"${year}-01-01"
     val to = s"${year}-12-31"
 
     val hours = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23"
 
-
-    val element = "RR"
+    val element = "RR,SLAG"
     // RR_1 = [Nedbør (1 time), mm] Nedbørmengde siste time
     // RR = [Nedbør, mm] Døgn- eller månedssum for nedbør (nedbørdøgn 07-07)
+    // SLAG = [Nedbørslag, kode] Døgnverdi: Sammendrag av nedbørtyper i døgnet: 02 (alle typer snø), 03 (alle typer regn), 30 (kombinasjon av 02 og 03), 31 (dugg, rim, tåke)
 
     val tidsSerieTypeID = "0"
     // 0 = Døgnverdier
@@ -34,15 +34,18 @@ object GetData {
     conn.setAutoCommit(false)
 
     var count = 0
-    val ps: PreparedStatement = conn.prepareStatement("insert into rain (measure_time, rain, quality) values (?, ?, ?)")
+    val ps: PreparedStatement = conn.prepareStatement("insert into precipitation (measure_time, rr, rr_quality, slag, slag_quality) values (?, ?, ?, ?, ?)")
     content.foreach(child => {
-      def prop(x: String) = { (child \\ x).text}
-      val date: String = prop("from")
-      var value: String = if ("-1.0".equals(prop("value"))) "0.0" else prop("value")
+      def sharedProp(attr: String) = { (child \\ attr).text}
+      def prop(datatype: String)(attr: String) = { ((child \\ "item").filter(n => (n \ "id").text == datatype) \\ attr).text}
+      val rrProp = prop("RR") _
+      val slagProp = prop("SLAG") _
+
+      val date: String = sharedProp("from")
+      var value: String = if ("-1.0".equals(rrProp("value"))) "0.0" else rrProp("value")
       value = if ("-99999".equals(value)) "0.0" else value
 
-      val quality: String = prop("quality")
-      //println(s"${date} = quality: ${quality}, value: ${value}")
+      val quality: String = rrProp("quality")
       if (!("0,1,2,5,6".split(",").contains(quality)))
         throw new RuntimeException("Unknown quality: " + quality)
 
@@ -51,6 +54,8 @@ object GetData {
       ps.setTimestamp(1, new Timestamp(fullDate.getTime))
       ps.setBigDecimal(2, bd.bigDecimal)
       ps.setLong(3, quality.toLong)
+      ps.setBigDecimal(4, BigDecimal(slagProp("value")).bigDecimal)
+      ps.setLong(5, slagProp("quality").toLong)
       ps.addBatch()
       count += 1
     })
@@ -91,9 +96,9 @@ object GetData {
     conn.commit()
     conn.close()
 
-    (1900 to 2014) foreach(year => {
-      doHoursOfYear(year, ds)
-    })
+    //(1900 to 2014) foreach(year => { doDaysOfYear(year, ds)})
+    doDaysOfYear(1980, ds)
+    //(1900 to 2014) foreach(year => { doDaysOfYear(year, ds)})
 
   }
 

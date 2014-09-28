@@ -33,13 +33,12 @@ http://eklima.met.no/metdata/MetDataService?invoke=getElementsProperties&languag
 Tilgjengelige elementer for tidsserie 0:
 http://eklima.met.no/metdata/MetDataService?invoke=getElementsFromTimeserieType&timeserietypeID=0
 
-
-Planen framover
-===============
-
 Web service som gir verdier fra database.
 
 Lage scatterplot av X og Y verdier.
 
+In progress
+===========
+Incorporate SLAG into database.
 
 
