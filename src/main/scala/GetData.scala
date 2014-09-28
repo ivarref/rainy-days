@@ -1,6 +1,6 @@
 import java.io.{File, PrintWriter}
 import java.security.MessageDigest
-import java.sql.{PreparedStatement, Timestamp}
+import java.sql.{SQLType, PreparedStatement, Timestamp}
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -54,8 +54,22 @@ object GetData {
       ps.setTimestamp(1, new Timestamp(fullDate.getTime))
       ps.setBigDecimal(2, bd.bigDecimal)
       ps.setLong(3, quality.toLong)
-      ps.setBigDecimal(4, BigDecimal(slagProp("value")).bigDecimal)
-      ps.setLong(5, slagProp("quality").toLong)
+      try {
+        ps.setBigDecimal(4, BigDecimal(slagProp("value")).bigDecimal)
+      } catch {
+        case e : Exception => {
+          println(s"date ${date} slag value was '" + slagProp("value") + "'")
+          ps.setBigDecimal(4, BigDecimal("-1").bigDecimal)
+        }
+      }
+      try {
+        ps.setLong(5, slagProp("quality").toLong)
+      } catch {
+        case e : Exception => {
+          println(s"date ${date} slag quality was ${slagProp("quality")}")
+          ps.setLong(5, -1)
+        }
+      }
       ps.addBatch()
       count += 1
     })
@@ -96,10 +110,8 @@ object GetData {
     conn.commit()
     conn.close()
 
-    //(1900 to 2014) foreach(year => { doDaysOfYear(year, ds)})
-    doDaysOfYear(1980, ds)
-    //(1900 to 2014) foreach(year => { doDaysOfYear(year, ds)})
-
+    (1937 to 2014) foreach(year => { doDaysOfYear(year, ds)})
+    //doDaysOfYear(1980, ds)
   }
 
   def getDataSource: HikariDataSource = {

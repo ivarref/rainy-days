@@ -40,5 +40,5 @@ Lage scatterplot av X og Y verdier.
 In progress
 ===========
 Incorporate SLAG into database.
-
+Seems SLAG is only available in 1951-2010.
 
