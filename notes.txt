@@ -22,6 +22,7 @@ http://eklima.met.no/metdata/MetDataService?invoke=getFlagProperties&language=&f
 2 - Verdi er ikke kontrollert.
 5 - Verdi er svært usikker (ikke korrigert).
 6 - Verdi er kontrollert og korrigert, eller originalverdi mangler og er interpolert - automatisk.
+7 - Verdi er feil (ikke korrigert).
 
 http://eklima.met.no/metdata/MetDataService?invoke=getMetData&timeserietypeID=0&format=&from=2006-01-01&to=2006-01-05&stations=18700&elements=tam&hours=&months=&username=
 
